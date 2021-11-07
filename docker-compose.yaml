@@ -1,0 +1,6 @@
+version: '3.3'
+
+services:
+  stundenplanbot:
+    container_name: stundenplanbot
+    image: stundenplanbot:latest
