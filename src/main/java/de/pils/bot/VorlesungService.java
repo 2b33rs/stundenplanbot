@@ -63,9 +63,9 @@ public class VorlesungService {
         ArrayList<Vorlesung> vorlesungen = getVorlesungen();
         Date now = new Date();
 
-        String string = "11.11.2021";
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        now = format.parse(string);
+//        String string = "11.11.2021";
+//        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+//        now = format.parse(string);
 
         ArrayList<Vorlesung> todayVorlesungen = new ArrayList<>();
         Calendar calendarNOW = Calendar.getInstance();
