@@ -34,13 +34,22 @@ public class MessageListener extends ListenerAdapter {
         } else if (msg.getContentRaw().equals("!h") || msg.getContentRaw().equals("!heute") || msg.getContentRaw().equals("!today") || msg.getContentRaw().equals("!t0")) {
             ArrayList<Vorlesung> heutigeVorlesungen = vorlesungService.getHeutigeVorlesungen();
 
-            String reply = "";
-            for (Vorlesung vorlesung : heutigeVorlesungen) {
-                reply += vorlesung;
-                reply += "\n";
-            }
 
-            msg.reply(reply).queue();
+            if(heutigeVorlesungen.isEmpty()){
+
+                msg.reply("Heute ist keine Vorlesung 🍻").queue();
+
+            } else {
+
+                String reply = "";
+                for (Vorlesung vorlesung : heutigeVorlesungen) {
+                    reply += vorlesung;
+                    reply += "\n";
+                }
+
+                msg.reply(reply).queue();
+
+            }
 
         }
     }
