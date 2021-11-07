@@ -14,40 +14,27 @@
     </properties>
     <dependencies>
 
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.9.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.14.3</version>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.22</version>
         </dependency>
 
-        <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>4.2.0_249</version>
-        </dependency>
 
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>dv8tion</id>
-            <name>m2-dv8tion</name>
-            <url>https://m2.dv8tion.net/releases</url>
-        </repository>
-    </repositories>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -69,6 +56,5 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
 
