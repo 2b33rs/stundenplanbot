@@ -55,6 +55,7 @@
     </repositories>
 
     <build>
+        <finalName>stundenplanbot</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
