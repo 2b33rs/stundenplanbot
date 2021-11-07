@@ -1,11 +1,14 @@
+package de.pils.bot;
+
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,9 +19,9 @@ public class VorlesungService {
 
 //    public static void main(String[] args) throws IOException, ParseException, LoginException {
 //
-//        ArrayList<Vorlesung> vorlesungen = getVorlesungen();
+//        ArrayList<de.pils.bot.Vorlesung> vorlesungen = getVorlesungen();
 //
-//        Vorlesung nextVorlesung = getNextVorlesung(vorlesungen);
+//        de.pils.bot.Vorlesung nextVorlesung = getNextVorlesung(vorlesungen);
 //        System.out.println(nextVorlesung);
 //
 //    }
@@ -53,6 +56,38 @@ public class VorlesungService {
             return null;
         }
     }
+
+    @SneakyThrows
+    public ArrayList<Vorlesung> getHeutigeVorlesungen() {
+
+        ArrayList<Vorlesung> vorlesungen = getVorlesungen();
+        Date now = new Date();
+
+        String string = "11.11.2021";
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        now = format.parse(string);
+
+        ArrayList<Vorlesung> todayVorlesungen = new ArrayList<>();
+        Calendar calendarNOW = Calendar.getInstance();
+        calendarNOW.setTime(now);
+
+        for (Vorlesung vorlesung : vorlesungen) {
+
+            Calendar calendarVor = Calendar.getInstance();
+            calendarVor.setTime(vorlesung.getStartTime());
+
+
+            if (calendarVor.get(Calendar.DAY_OF_WEEK) == calendarNOW.get(Calendar.DAY_OF_WEEK)) {
+                todayVorlesungen.add(vorlesung);
+                //System.out.println(vorlesung.getStartTime());
+            }
+        }
+
+        todayVorlesungen.sort(Comparator.comparing(Vorlesung::getStartTime));
+
+        return todayVorlesungen;
+    }
+
 
     public ArrayList<Vorlesung> getVorlesungen() throws IOException, ParseException {
 
@@ -154,7 +189,6 @@ public class VorlesungService {
         Date date = sdf.parse(timeString);
         Calendar hourCalendar = Calendar.getInstance();
         hourCalendar.setTime(date);
-
 
         Calendar calendar = Calendar.getInstance();
 
