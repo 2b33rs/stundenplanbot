@@ -4,3 +4,10 @@ services:
   stundenplanbot:
     container_name: stundenplanbot
     image: stundenplanbot:latest
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.10.0/24
