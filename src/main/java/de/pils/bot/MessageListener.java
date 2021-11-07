@@ -1,11 +1,12 @@
+package de.pils.bot;
+
 import lombok.SneakyThrows;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class MessageListener extends ListenerAdapter {
 
@@ -29,6 +30,17 @@ public class MessageListener extends ListenerAdapter {
             Vorlesung nextVorlesung = vorlesungService.getNextVorlesung();
 
             msg.reply(nextVorlesung.toString()).queue();
+
+        } else if (msg.getContentRaw().equals("!h") || msg.getContentRaw().equals("!heute") || msg.getContentRaw().equals("!today") || msg.getContentRaw().equals("!t0")) {
+            ArrayList<Vorlesung> heutigeVorlesungen = vorlesungService.getHeutigeVorlesungen();
+
+            String reply = "";
+            for (Vorlesung vorlesung : heutigeVorlesungen) {
+                reply += vorlesung;
+                reply += "\n";
+            }
+
+            msg.reply(reply).queue();
 
         }
     }
