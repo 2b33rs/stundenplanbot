@@ -10,6 +10,6 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 #
 FROM adoptopenjdk/openjdk16:alpine-jre
-COPY --from=build /home/app/target/stundenplanbot-SNAPSHOT.jar /usr/local/lib/stundenplanbot.jar
+COPY --from=build /home/app/target/stundenplanbot.jar /usr/local/lib/stundenplanbot.jar
 #EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/local/lib/stundenplanbot.jar"]
