@@ -4,28 +4,28 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-public class StundenplanBot {
+public class VorlesungService {
 
 
-    public static void main(String[] args) throws IOException, ParseException {
+//    public static void main(String[] args) throws IOException, ParseException, LoginException {
+//
+//        ArrayList<Vorlesung> vorlesungen = getVorlesungen();
+//
+//        Vorlesung nextVorlesung = getNextVorlesung(vorlesungen);
+//        System.out.println(nextVorlesung);
+//
+//    }
 
+    public Vorlesung getNextVorlesung() throws ParseException, IOException {
 
         ArrayList<Vorlesung> vorlesungen = getVorlesungen();
-
-        Vorlesung nextVorlesung = getNextVorlesung(vorlesungen);
-        System.out.println(nextVorlesung);
-
-
-    }
-
-
-    public static Vorlesung getNextVorlesung(ArrayList<Vorlesung> vorlesungen) throws ParseException {
 
         Date now = new Date();
 
@@ -33,9 +33,7 @@ public class StundenplanBot {
 //        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 //        now = format.parse(string);
 
-
         ArrayList<Vorlesung> futureVorlesungen = new ArrayList<>();
-
 
         for (Vorlesung vorlesung : vorlesungen) {
 
@@ -54,11 +52,9 @@ public class StundenplanBot {
         } else {
             return null;
         }
-
     }
 
-
-    public static ArrayList<Vorlesung> getVorlesungen() throws IOException, ParseException {
+    public ArrayList<Vorlesung> getVorlesungen() throws IOException, ParseException {
 
         //String timetable = TimetableService.getTimetableHTML();
         String woche = "0";
@@ -78,7 +74,6 @@ public class StundenplanBot {
         Element thead = timetable.select("thead").first();
 
         Date monday = new Date();
-
 
         for (Element th : thead.select("th")) {
 
@@ -154,7 +149,7 @@ public class StundenplanBot {
     }
 
     @NotNull
-    private static Date getDate(Date monday, int j, String timeString) throws ParseException {
+    private Date getDate(Date monday, int j, String timeString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Date date = sdf.parse(timeString);
         Calendar hourCalendar = Calendar.getInstance();
@@ -170,7 +165,6 @@ public class StundenplanBot {
 
 //        startTime.setDate(monday.getDate() + j);
 //        endTime.setDate(monday.getDate() + j);
-
 
         return calendar.getTime();
     }
