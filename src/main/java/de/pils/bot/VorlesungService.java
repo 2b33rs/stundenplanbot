@@ -26,7 +26,8 @@ public class VorlesungService {
 //
 //    }
 
-    public Vorlesung getNextVorlesung() throws ParseException, IOException {
+    @SneakyThrows
+    public Vorlesung getNextVorlesung() {
 
         ArrayList<Vorlesung> vorlesungen = getVorlesungen();
 
