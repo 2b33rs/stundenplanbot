@@ -64,7 +64,7 @@ public class VorlesungService {
         ArrayList<Vorlesung> vorlesungen = getVorlesungen();
         Date now = new Date();
 
-//        String string = "11.11.2021";
+//        String string = "29.11.2021";
 //        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 //        now = format.parse(string);
 
@@ -165,6 +165,9 @@ public class VorlesungService {
 //                    System.out.println(time);
 //                    System.out.println("Subject: " + subject + " Teacher: " + teacher);
 
+                    ArrayList<String> moodleUrls = DBService.getMoodleUrlsByVorlesungAlias(subject);
+                    ArrayList<String> zoomUrls = DBService.getZoomUrlsByVorlesungAlias(subject);
+
                     Vorlesung vorlesung = new Vorlesung(
                             j,
                             i + 1,
@@ -173,7 +176,9 @@ public class VorlesungService {
                             subject,
                             teacher,
                             room,
-                            remark
+                            remark,
+                            moodleUrls,
+                            zoomUrls
                     );
                     vorlesungen.add(vorlesung);
                 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -19,9 +20,11 @@ public class Vorlesung {
     private String teacher;
     private String room;
     private String remark;
-    
+    private ArrayList<String> moodleUrls;
+    private ArrayList<String> zoomUrls;
+
     @Override
-    public String toString(){
+    public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EE dd.MM", Locale.GERMAN);
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.GERMAN);
 
@@ -43,7 +46,19 @@ public class Vorlesung {
                 .append(timeFormat.format(this.getEndTime()))
                 .append(" Uhr");
 
-        return reply.toString();
+        if (!moodleUrls.isEmpty() || !zoomUrls.isEmpty()) reply.append("\n\n");
+
+        for (String moodleUrl : moodleUrls) {
+            reply.append("Moodle: ").append(moodleUrl).append("\n");
+        }
+
+        if (!zoomUrls.isEmpty()) reply.append("\n");
+
+        for (String zoomUrl : zoomUrls) {
+            reply.append("Zoom: ").append(zoomUrl).append("\n");
+        }
+
+        return reply.toString().trim();
     }
 
 }

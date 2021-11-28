@@ -10,6 +10,8 @@ public class NextCommand {
         VorlesungService vorlesungService = new VorlesungService();
         Vorlesung nextVorlesung = vorlesungService.getNextVorlesung();
 
-        msg.reply(nextVorlesung.toString()).queue();
+        String reply = nextVorlesung.toString();
+
+        msg.reply(reply).queue();
     }
 }
